@@ -1,4 +1,4 @@
-package com.auth.auth.modules.user.useCases.implementations;
+package com.auth.auth.modules.user.useCases;
 
 import com.auth.auth.modules.user.repositories.IUserRepository;
 import org.springframework.security.core.userdetails.UserDetails;

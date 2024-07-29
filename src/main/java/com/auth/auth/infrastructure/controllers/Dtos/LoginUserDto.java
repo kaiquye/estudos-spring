@@ -1,3 +1,3 @@
-package com.auth.auth.infrastructure.controllers.user.Dtos;
+package com.auth.auth.infrastructure.controllers.Dtos;
 
 public record LoginUserDto(String email, String password) {}

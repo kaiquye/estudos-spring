@@ -1,4 +1,4 @@
-package com.auth.auth.modules.user.useCases.implementations;
+package com.auth.auth.modules.user.useCases;
 
 import com.auth.auth.infrastructure.exceptions.ResponseHandler;
 import com.auth.auth.infrastructure.security.interfaces.ITokenService;

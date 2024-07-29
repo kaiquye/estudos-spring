@@ -1,7 +1,7 @@
-package com.auth.auth.infrastructure.controllers.user;
+package com.auth.auth.infrastructure.controllers;
 
-import com.auth.auth.infrastructure.controllers.user.Dtos.CreateUserDto;
-import com.auth.auth.infrastructure.controllers.user.Dtos.LoginUserDto;
+import com.auth.auth.infrastructure.controllers.Dtos.LoginUserDto;
+import com.auth.auth.infrastructure.controllers.Dtos.CreateUserDto;
 import com.auth.auth.modules.user.interfaces.CreateUserInput;
 import com.auth.auth.modules.user.interfaces.CreateUserOutput;
 import com.auth.auth.modules.user.interfaces.LoginUserInput;
