@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity implements UserDetails {
+public class UserModel extends BaseEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,13 +20,13 @@ public class User extends BaseEntity implements UserDetails {
     private String password;
 
 
-    public User(String name, String email, String password) {
+    public UserModel(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.setPassword(password);;
     }
 
-    public User() {}
+    public UserModel() {}
 
     public Long getId() {
         return id;
@@ -75,8 +75,8 @@ public class User extends BaseEntity implements UserDetails {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
+        UserModel userModel = (UserModel) o;
+        return Objects.equals(id, userModel.id) && Objects.equals(name, userModel.name) && Objects.equals(email, userModel.email) && Objects.equals(password, userModel.password);
     }
 
     @Override

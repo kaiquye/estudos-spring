@@ -1,7 +1,7 @@
 package com.auth.auth.infrastructure.security;
 
 import com.auth.auth.infrastructure.security.interfaces.ITokenService;
-import com.auth.auth.modules.user.User;
+import com.auth.auth.modules.user.UserModel;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -24,11 +24,11 @@ public class TokenServiceImpl implements ITokenService {
     }
 
     @Override
-    public String generate(User user) {
+    public String generate(UserModel userModel) {
         Algorithm algorithm = Algorithm.HMAC256(this.SECRET);
         String token = JWT.create()
                 .withIssuer("auth-api")
-                .withSubject(user.getEmail())
+                .withSubject(userModel.getEmail())
                 .withExpiresAt(genExpirationDate())
                 .sign(algorithm);
         return token;

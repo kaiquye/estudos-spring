@@ -1,15 +1,13 @@
 package com.auth.auth.modules.user.useCases;
 
 import com.auth.auth.infrastructure.exceptions.ResponseHandler;
-import com.auth.auth.modules.user.User;
+import com.auth.auth.modules.user.UserModel;
 import com.auth.auth.modules.user.interfaces.CreateUserInput;
 import com.auth.auth.modules.user.interfaces.CreateUserOutput;
 import com.auth.auth.modules.user.repositories.IUserRepository;
 import com.auth.auth.modules.user.useCases.interfaces.ICreateUserUseCase;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class CreateUserUseCaseImpl implements ICreateUserUseCase {
@@ -28,9 +26,9 @@ public class CreateUserUseCaseImpl implements ICreateUserUseCase {
             throw ResponseHandler.notFound("user already exists").addDetails(input.email()).build();
         }
 
-        User user = new User(input.name(), input.email(), this.passwordEncoder.encode(input.password()));
-        User newUser = this.userRepository.save(user);
+        UserModel userModel = new UserModel(input.name(), input.email(), this.passwordEncoder.encode(input.password()));
+        UserModel newUserModel = this.userRepository.save(userModel);
 
-        return new CreateUserOutput(newUser.getId());
+        return new CreateUserOutput(newUserModel.getId());
     }
 }

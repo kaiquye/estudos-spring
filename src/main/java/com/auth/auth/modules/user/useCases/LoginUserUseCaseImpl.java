@@ -2,7 +2,7 @@ package com.auth.auth.modules.user.useCases;
 
 import com.auth.auth.infrastructure.exceptions.ResponseHandler;
 import com.auth.auth.infrastructure.security.interfaces.ITokenService;
-import com.auth.auth.modules.user.User;
+import com.auth.auth.modules.user.UserModel;
 import com.auth.auth.modules.user.interfaces.LoginUserInput;
 import com.auth.auth.modules.user.interfaces.LoginUserOutput;
 import com.auth.auth.modules.user.repositories.IUserRepository;
@@ -33,9 +33,9 @@ public class LoginUserUseCaseImpl implements ILoginUserUseCase {
 
             UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(input.email(), input.password());
             Authentication auth = this.authenticationManager.authenticate(usernamePassword);
-            User user = (User) auth.getPrincipal();
+            UserModel userModel = (UserModel) auth.getPrincipal();
 
-            String accessToken = this.tokenService.generate(user);
-            return new LoginUserOutput(accessToken, user.getId());
+            String accessToken = this.tokenService.generate(userModel);
+            return new LoginUserOutput(accessToken, userModel.getId());
     }
 }
