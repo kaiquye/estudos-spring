@@ -1,15 +1,17 @@
 package com.auth.auth.modules.user;
 
+import com.auth.auth.modules.user.enums.ERoles;
 import com.auth.auth.shared.BaseEntity;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users")
+@Table(name = "tb_user")
 public class UserModel extends BaseEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,15 +20,31 @@ public class UserModel extends BaseEntity implements UserDetails {
     @Column(unique = true)
     private String email;
     private String password;
+    @ManyToMany
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private HashSet<RoleModel> roles;
 
+    protected UserModel() {}
 
-    public UserModel(String name, String email, String password) {
+    protected UserModel(String name, String email, String password) {
         this.name = name;
         this.email = email;
-        this.setPassword(password);;
+        this.password = password;
     }
 
-    public UserModel() {}
+    public static UserModel create(String name, String email, String password, RoleModel role) throws Exception {
+        if(role.getRole() != ERoles.DEFAULT) {
+            throw new IllegalArgumentException("Invalid role provided");
+        }
+
+        var user =  new UserModel(name, email, password);
+        user.roles.add(role);
+        return user;
+    }
 
     public Long getId() {
         return id;
